@@ -1,0 +1,384 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FCDDDDB1175A6D7100953722 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDDDDB0175A6D7100953722 /* UIKit.framework */; };
+		FCDDDDB3175A6D7100953722 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDDDDB2175A6D7100953722 /* Foundation.framework */; };
+		FCDDDDB5175A6D7100953722 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDDDDB4175A6D7100953722 /* CoreGraphics.framework */; };
+		FCDDDDBB175A6D7100953722 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FCDDDDB9175A6D7100953722 /* InfoPlist.strings */; };
+		FCDDDDBD175A6D7100953722 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDDDDBC175A6D7100953722 /* main.m */; };
+		FCDDDDC1175A6D7100953722 /* JSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDDDDC0175A6D7100953722 /* JSAppDelegate.m */; };
+		FCDDDDC3175A6D7100953722 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDDDDC2175A6D7100953722 /* Default.png */; };
+		FCDDDDC5175A6D7100953722 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDDDDC4175A6D7100953722 /* Default@2x.png */; };
+		FCDDDDC7175A6D7100953722 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDDDDC6175A6D7100953722 /* Default-568h@2x.png */; };
+		FCDDDDCF175A6E1700953722 /* JSSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDDDDCE175A6E1700953722 /* JSSurveyViewController.m */; };
+		FCDDDDD5175A720000953722 /* JSSurveyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDDDDD4175A720000953722 /* JSSurveyViewModel.m */; };
+		FCDDDDEE175A7CF200953722 /* libReactiveFormlets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDDDDEB175A7C6200953722 /* libReactiveFormlets.a */; };
+		FCDDDE19175A7F4900953722 /* libReactiveCocoa-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDDDE18175A7F4900953722 /* libReactiveCocoa-iOS.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCDDDDEA175A7C6200953722 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCDDDDE4175A7C6200953722 /* ReactiveFormlets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCD30F3916F64B4A00473BB8;
+			remoteInfo = ReactiveFormlets;
+		};
+		FCDDDDEC175A7C6200953722 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCDDDDE4175A7C6200953722 /* ReactiveFormlets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCD30F4A16F64B4B00473BB8;
+			remoteInfo = ReactiveFormletsTests;
+		};
+		FCDDDDEF175A7CFF00953722 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCDDDDE4175A7C6200953722 /* ReactiveFormlets.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FCD30F3816F64B4A00473BB8;
+			remoteInfo = ReactiveFormlets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FCDDDDAD175A6D7100953722 /* RAFExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RAFExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCDDDDB0175A6D7100953722 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FCDDDDB2175A6D7100953722 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FCDDDDB4175A6D7100953722 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FCDDDDB8175A6D7100953722 /* RAFExamples-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RAFExamples-Info.plist"; sourceTree = "<group>"; };
+		FCDDDDBA175A6D7100953722 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FCDDDDBC175A6D7100953722 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FCDDDDBE175A6D7100953722 /* RAFExamples-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RAFExamples-Prefix.pch"; sourceTree = "<group>"; };
+		FCDDDDBF175A6D7100953722 /* JSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSAppDelegate.h; sourceTree = "<group>"; };
+		FCDDDDC0175A6D7100953722 /* JSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSAppDelegate.m; sourceTree = "<group>"; };
+		FCDDDDC2175A6D7100953722 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		FCDDDDC4175A6D7100953722 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FCDDDDC6175A6D7100953722 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FCDDDDCD175A6E1700953722 /* JSSurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSurveyViewController.h; sourceTree = "<group>"; };
+		FCDDDDCE175A6E1700953722 /* JSSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSurveyViewController.m; sourceTree = "<group>"; };
+		FCDDDDD3175A720000953722 /* JSSurveyViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSurveyViewModel.h; sourceTree = "<group>"; };
+		FCDDDDD4175A720000953722 /* JSSurveyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSurveyViewModel.m; sourceTree = "<group>"; };
+		FCDDDDE4175A7C6200953722 /* ReactiveFormlets.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveFormlets.xcodeproj; path = external/ReactiveFormlets/ReactiveFormlets.xcodeproj; sourceTree = "<group>"; };
+		FCDDDE18175A7F4900953722 /* libReactiveCocoa-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "libReactiveCocoa-iOS.a"; path = "external/ReactiveFormlets/external/ReactiveCocoa/ReactiveCocoaFramework/build/Release-iphoneos/libReactiveCocoa-iOS.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCDDDDAA175A6D7100953722 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCDDDE19175A7F4900953722 /* libReactiveCocoa-iOS.a in Frameworks */,
+				FCDDDDEE175A7CF200953722 /* libReactiveFormlets.a in Frameworks */,
+				FCDDDDB1175A6D7100953722 /* UIKit.framework in Frameworks */,
+				FCDDDDB3175A6D7100953722 /* Foundation.framework in Frameworks */,
+				FCDDDDB5175A6D7100953722 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCDDDDA4175A6D7100953722 = {
+			isa = PBXGroup;
+			children = (
+				FCDDDDB6175A6D7100953722 /* RAFExamples */,
+				FCDDDDAF175A6D7100953722 /* Frameworks */,
+				FCDDDDAE175A6D7100953722 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCDDDDAE175A6D7100953722 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCDDDDAD175A6D7100953722 /* RAFExamples.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCDDDDAF175A6D7100953722 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCDDDDE4175A7C6200953722 /* ReactiveFormlets.xcodeproj */,
+				FCDDDE18175A7F4900953722 /* libReactiveCocoa-iOS.a */,
+				FCDDDDB0175A6D7100953722 /* UIKit.framework */,
+				FCDDDDB2175A6D7100953722 /* Foundation.framework */,
+				FCDDDDB4175A6D7100953722 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCDDDDB6175A6D7100953722 /* RAFExamples */ = {
+			isa = PBXGroup;
+			children = (
+				FCDDDDBF175A6D7100953722 /* JSAppDelegate.h */,
+				FCDDDDC0175A6D7100953722 /* JSAppDelegate.m */,
+				FCDDDDD6175A781D00953722 /* Survey View */,
+				FCDDDDB7175A6D7100953722 /* Supporting Files */,
+			);
+			path = RAFExamples;
+			sourceTree = "<group>";
+		};
+		FCDDDDB7175A6D7100953722 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FCDDDDB8175A6D7100953722 /* RAFExamples-Info.plist */,
+				FCDDDDB9175A6D7100953722 /* InfoPlist.strings */,
+				FCDDDDBC175A6D7100953722 /* main.m */,
+				FCDDDDBE175A6D7100953722 /* RAFExamples-Prefix.pch */,
+				FCDDDDC2175A6D7100953722 /* Default.png */,
+				FCDDDDC4175A6D7100953722 /* Default@2x.png */,
+				FCDDDDC6175A6D7100953722 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCDDDDD6175A781D00953722 /* Survey View */ = {
+			isa = PBXGroup;
+			children = (
+				FCDDDDCD175A6E1700953722 /* JSSurveyViewController.h */,
+				FCDDDDCE175A6E1700953722 /* JSSurveyViewController.m */,
+				FCDDDDD3175A720000953722 /* JSSurveyViewModel.h */,
+				FCDDDDD4175A720000953722 /* JSSurveyViewModel.m */,
+			);
+			name = "Survey View";
+			sourceTree = "<group>";
+		};
+		FCDDDDE5175A7C6200953722 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCDDDDEB175A7C6200953722 /* libReactiveFormlets.a */,
+				FCDDDDED175A7C6200953722 /* ReactiveFormletsTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FCDDDDAC175A6D7100953722 /* RAFExamples */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCDDDDCA175A6D7100953722 /* Build configuration list for PBXNativeTarget "RAFExamples" */;
+			buildPhases = (
+				FCDDDDA9175A6D7100953722 /* Sources */,
+				FCDDDDAA175A6D7100953722 /* Frameworks */,
+				FCDDDDAB175A6D7100953722 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCDDDDF0175A7CFF00953722 /* PBXTargetDependency */,
+			);
+			name = RAFExamples;
+			productName = RAFExamples;
+			productReference = FCDDDDAD175A6D7100953722 /* RAFExamples.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCDDDDA5175A6D7100953722 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JS;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Jon Sterling";
+			};
+			buildConfigurationList = FCDDDDA8175A6D7100953722 /* Build configuration list for PBXProject "RAFExamples" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FCDDDDA4175A6D7100953722;
+			productRefGroup = FCDDDDAE175A6D7100953722 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FCDDDDE5175A7C6200953722 /* Products */;
+					ProjectRef = FCDDDDE4175A7C6200953722 /* ReactiveFormlets.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				FCDDDDAC175A6D7100953722 /* RAFExamples */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FCDDDDEB175A7C6200953722 /* libReactiveFormlets.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactiveFormlets.a;
+			remoteRef = FCDDDDEA175A7C6200953722 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FCDDDDED175A7C6200953722 /* ReactiveFormletsTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ReactiveFormletsTests.octest;
+			remoteRef = FCDDDDEC175A7C6200953722 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCDDDDAB175A6D7100953722 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCDDDDBB175A6D7100953722 /* InfoPlist.strings in Resources */,
+				FCDDDDC3175A6D7100953722 /* Default.png in Resources */,
+				FCDDDDC5175A6D7100953722 /* Default@2x.png in Resources */,
+				FCDDDDC7175A6D7100953722 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCDDDDA9175A6D7100953722 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCDDDDBD175A6D7100953722 /* main.m in Sources */,
+				FCDDDDC1175A6D7100953722 /* JSAppDelegate.m in Sources */,
+				FCDDDDCF175A6E1700953722 /* JSSurveyViewController.m in Sources */,
+				FCDDDDD5175A720000953722 /* JSSurveyViewModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCDDDDF0175A7CFF00953722 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ReactiveFormlets;
+			targetProxy = FCDDDDEF175A7CFF00953722 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FCDDDDB9175A6D7100953722 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCDDDDBA175A6D7100953722 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FCDDDDC8175A6D7100953722 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FCDDDDC9175A6D7100953722 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FCDDDDCB175A6D7100953722 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RAFExamples/RAFExamples-Prefix.pch";
+				INFOPLIST_FILE = "RAFExamples/RAFExamples-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FCDDDDCC175A6D7100953722 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RAFExamples/RAFExamples-Prefix.pch";
+				INFOPLIST_FILE = "RAFExamples/RAFExamples-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCDDDDA8175A6D7100953722 /* Build configuration list for PBXProject "RAFExamples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCDDDDC8175A6D7100953722 /* Debug */,
+				FCDDDDC9175A6D7100953722 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCDDDDCA175A6D7100953722 /* Build configuration list for PBXNativeTarget "RAFExamples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCDDDDCB175A6D7100953722 /* Debug */,
+				FCDDDDCC175A6D7100953722 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCDDDDA5175A6D7100953722 /* Project object */;
+}
