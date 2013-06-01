@@ -43,6 +43,9 @@
     RAC(_viewModel, data) = _form.dataSignal;
     RAC(_viewModel, valid) = _form.validation;
 
+    _form.headerTitle = @"Enter your info:";
+    RAC(_form, footerTitle) = RACAbleWithStart(self.viewModel.message);
+
     self.view = [_form buildView];
 }
 

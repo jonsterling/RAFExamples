@@ -14,11 +14,13 @@
 {
     if (self = [super init])
     {
-        RACSignal *validation = RACAble(self.valid);
+        RACSignal *validation = RACAbleWithStart(self.valid);
         _doneCommand = [RACCommand commandWithCanExecuteSignal:validation];
-        RAC(self.message) = [RACSignal if:validation then:[RACAble(self.data) map:^id(id<JSSurveyFormModel> data) {
-            return [NSString stringWithFormat:@"%@ is %@ years old!", data.name, data.age];
-        }] else:[RACSignal empty]];
+
+        NSArray *composite = @[ RACAbleWithStart(self.data), validation ];
+        RAC(self.message) = [RACSignal combineLatest:composite reduce:^(id<JSSurveyFormModel> data, NSNumber *isValid) {
+            return isValid.boolValue ? [NSString stringWithFormat:@"%@ is %@ years old!", data.name, data.age] : @"not valid";
+        }];
     }
 
     return self;
