@@ -10,7 +10,6 @@
 #import <ReactiveFormlets/ReactiveFormlets.h>
 #import <ReactiveFormlets/RAFTableForm.h>
 #import <ReactiveFormlets/RAFInputRow.h>
-#import <ReactiveFormlets/RAFValidator.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveFormlets/EXTScope.h>
 #import "JSSurveyViewModel.h"
@@ -41,8 +40,8 @@
     id<RAFNumber> ageField = [[[RAFNumberInputRow new] placeholder:@"62"] validators:@[ notZero ]];
 
     _form = [JSSurveyForm name:nameField age:ageField];
-    RAC(_viewModel, data) = _form.raf_signal;
-    RAC(_viewModel, valid) = _form.raf_validation;
+    RAC(_viewModel, data) = _form.dataSignal;
+    RAC(_viewModel, valid) = _form.validation;
 
     self.view = [_form buildView];
 }

@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <ReactiveFormlets/ReactiveFormlets.h>
 
-@protocol JSSurveyFormModel <RAFModel>
+@protocol JSSurveyFormModel
 - (id<RAFText>)name;
 - (id<RAFNumber>)age;
 + (instancetype)name:(id<RAFText>)name age:(id<RAFNumber>)age;
 @end
 
 @interface JSSurveyViewModel : NSObject
+@property (strong, readonly) RACCommand *doneCommand;
+
 @property (strong) id<JSSurveyFormModel> data;
 @property (assign, getter = isValid) BOOL valid;
 @property (strong) NSString *message;
-
-@property (strong, readonly) RACCommand *doneCommand;
 @end
