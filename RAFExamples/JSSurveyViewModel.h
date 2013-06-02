@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <ReactiveFormlets/ReactiveFormlets.h>
 #import <ReactiveFormlets/RAFValidation.h>
+#import <ReactiveFormlets/RAFValidator.h>
 
 @protocol JSSurveyFormModel
 - (id<RAFText>)name;
@@ -18,6 +19,8 @@
 
 @interface JSSurveyViewModel : NSObject
 @property (strong, readonly) RACCommand *doneCommand;
+@property (strong, readonly) RAFValidator *nameValidator;
+@property (strong, readonly) RAFValidator *ageValidator;
 
 @property (strong) id<JSSurveyFormModel> data;
 @property (strong) RAFValidation *validationState;
