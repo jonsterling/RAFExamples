@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveFormlets/ReactiveFormlets.h>
+#import <ReactiveFormlets/RAFValidation.h>
 
 @protocol JSSurveyFormModel
 - (id<RAFText>)name;
@@ -19,6 +20,6 @@
 @property (strong, readonly) RACCommand *doneCommand;
 
 @property (strong) id<JSSurveyFormModel> data;
-@property (assign, getter = isValid) BOOL valid;
+@property (strong) RAFValidation *validationState;
 @property (strong) NSString *message;
 @end

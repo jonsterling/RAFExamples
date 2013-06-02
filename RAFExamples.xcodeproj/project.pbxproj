@@ -65,7 +65,7 @@
 		FCDDDDD3175A720000953722 /* JSSurveyViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSurveyViewModel.h; sourceTree = "<group>"; };
 		FCDDDDD4175A720000953722 /* JSSurveyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSurveyViewModel.m; sourceTree = "<group>"; };
 		FCDDDDE4175A7C6200953722 /* ReactiveFormlets.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveFormlets.xcodeproj; path = external/ReactiveFormlets/ReactiveFormlets.xcodeproj; sourceTree = "<group>"; };
-		FCDDDE18175A7F4900953722 /* libReactiveCocoa-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "libReactiveCocoa-iOS.a"; path = "external/ReactiveFormlets/external/ReactiveCocoa/ReactiveCocoaFramework/build/Release-iphoneos/libReactiveCocoa-iOS.a"; sourceTree = "<group>"; };
+		FCDDDE18175A7F4900953722 /* libReactiveCocoa-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libReactiveCocoa-iOS.a"; path = "external/ReactiveFormlets/external/ReactiveCocoa/ReactiveCocoaFramework/build/Release-iphoneos/libReactiveCocoa-iOS.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

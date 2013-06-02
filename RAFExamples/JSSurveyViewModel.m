@@ -7,6 +7,7 @@
 //
 
 #import "JSSurveyViewModel.h"
+#import <ReactiveFormlets/RAFValidation.h>
 
 @implementation JSSurveyViewModel
 
@@ -14,12 +15,16 @@
 {
     if (self = [super init])
     {
-        RACSignal *validation = RACAbleWithStart(self.valid);
-        _doneCommand = [RACCommand commandWithCanExecuteSignal:validation];
+        RACSignal *validation = RACAbleWithStart(self.validationState);
+        RACSignal *isValid = [validation raf_isSuccessSignal];
+        _doneCommand = [RACCommand commandWithCanExecuteSignal:isValid];
 
-        NSArray *composite = @[ RACAbleWithStart(self.data), validation ];
-        RAC(self.message) = [RACSignal combineLatest:composite reduce:^(id<JSSurveyFormModel> data, NSNumber *isValid) {
-            return isValid.boolValue ? [NSString stringWithFormat:@"%@ is %@ years old!", data.name, data.age] : @"not valid";
+        RAC(self.message) = [validation map:^(RAFValidation *validation) {
+            return [validation caseSuccess:^(id<JSSurveyFormModel> value) {
+                return [NSString stringWithFormat:@"%@ is %@ years old!", value.name, value.age];
+            } failure:^(id errors) {
+                return [NSString stringWithFormat:@"[%@]", [errors componentsJoinedByString:@", "]];
+            }];
         }];
     }
 

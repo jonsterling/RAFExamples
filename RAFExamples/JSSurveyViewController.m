@@ -10,8 +10,11 @@
 #import <ReactiveFormlets/ReactiveFormlets.h>
 #import <ReactiveFormlets/RAFTableForm.h>
 #import <ReactiveFormlets/RAFInputRow.h>
-#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveFormlets/RAFValidator.h>
+#import <ReactiveFormlets/RAFValidation.h>
 #import <ReactiveFormlets/EXTScope.h>
+#import <ReactiveFormlets/NSArray+RAFMonoid.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "JSSurveyViewModel.h"
 
 @interface JSSurveyViewController ()
@@ -29,19 +32,20 @@
 
     Class JSSurveyForm = [RAFSingleSectionTableForm model:@protocol(JSSurveyFormModel)];
 
-    RAFValidator requiredText = ^BOOL (NSString *text) {
-        return text.length > 0;
-    };
-    RAFValidator notZero = ^BOOL (NSNumber *number) {
-        return number && ![number isEqualToNumber:@0];
-    };
+    RAFValidator *requiredText = [RAFValidator predicate:^RAFValidation *(NSString *text) {
+        return text.length > 0 ? [RAFValidation success:text] : [RAFValidation failure:@[ @"name required" ]];
+    }];
 
-    id<RAFText> nameField = [[[RAFTextInputRow new] placeholder:@"George Smiley"] validators:@[ requiredText ]];
-    id<RAFNumber> ageField = [[[RAFNumberInputRow new] placeholder:@"62"] validators:@[ notZero ]];
+    RAFValidator *notZero = [RAFValidator predicate:^RAFValidation *(NSNumber *number) {
+        return (number && ![number isEqualToNumber:@0]) ? [RAFValidation success:number] : [RAFValidation failure:@[ @"age = 0" ]];
+    }];
+
+    id<RAFText> nameField = [[[RAFTextInputRow new] placeholder:@"George Smiley"] validator:requiredText];
+    id<RAFNumber> ageField = [[[RAFNumberInputRow new] placeholder:@"62"] validator:notZero];
 
     _form = [JSSurveyForm name:nameField age:ageField];
-    RAC(_viewModel, data) = _form.dataSignal;
-    RAC(_viewModel, valid) = _form.validation;
+    RAC(self.viewModel.data) = _form.rawDataSignal;
+    RAC(self.viewModel.validationState) = _form.validationSignal;
 
     _form.headerTitle = @"Enter your info:";
     RAC(_form, footerTitle) = RACAbleWithStart(self.viewModel.message);
