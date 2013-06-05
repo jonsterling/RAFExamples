@@ -39,9 +39,22 @@
     RAC(self.viewModel.validationState) = _form.validationSignal;
 
     _form.headerTitle = @"Enter your info:";
-    RAC(_form, footerTitle) = RACAbleWithStart(self.viewModel.message);
 
-    self.view = [_form buildView];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 280.f, 140.f)];
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:76.0/255 green:86.0/255 blue:108.0/255 alpha:1];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:17.f];
+    label.shadowColor = [UIColor whiteColor];
+    label.shadowOffset = CGSizeMake(0.f, 1.f);
+
+    RAC(label, text) = RACAbleWithStart(self.viewModel.message);
+
+    UITableView *formTableView = [_form buildView];
+    formTableView.tableFooterView = label;
+    self.view = formTableView;
 }
 
 - (void)viewDidLoad {
