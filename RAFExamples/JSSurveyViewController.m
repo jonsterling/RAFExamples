@@ -17,8 +17,9 @@
 #import "JSSurveyViewModel.h"
 
 @interface JSSurveyViewController ()
-@property (strong) JSSurveyViewModel *viewModel;
+@property (readonly, strong) JSSurveyViewModel *viewModel;
 @end
+
 @implementation JSSurveyViewController {
     RAFSingleSectionTableForm<JSSurveyFormModel> *_form;
 }
