@@ -29,7 +29,7 @@
 
         RAC(self.message) = [validation map:^(RAFValidation *v) {
             return [v caseSuccess:^(id<JSSurveyFormModel> value) {
-                return [NSString stringWithFormat:@"%@ is %@ years old!", value.name, value.age];
+                return [NSString stringWithFormat:@"%@ is %@ years old!", value.name.raf_extract, value.age.raf_extract];
             } failure:^(id errors) {
                 return [NSString stringWithFormat:@"[%@]", [errors componentsJoinedByString:@", "]];
             }];
