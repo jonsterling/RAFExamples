@@ -17,12 +17,11 @@
 #import "JSSurveyViewModel.h"
 
 @interface JSSurveyViewController ()
-@property (readonly, strong) JSSurveyViewModel *viewModel;
+@property (strong, readonly) JSSurveyViewModel *viewModel;
+@property (strong, readonly) RAFSingleSectionTableForm<JSSurveyFormModel> *form;
 @end
 
-@implementation JSSurveyViewController {
-    RAFSingleSectionTableForm<JSSurveyFormModel> *_form;
-}
+@implementation JSSurveyViewController
 
 - (void)loadView {
     [super loadView];
