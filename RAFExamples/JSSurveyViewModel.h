@@ -11,10 +11,12 @@
 #import <ReactiveFormlets/RAFValidation.h>
 #import <ReactiveFormlets/RAFValidator.h>
 
-@protocol JSSurveyFormModel
+@protocol JSSurveyFormModel <RAFExtract>
 - (id<RAFText>)name;
 - (id<RAFNumber>)age;
 + (instancetype)name:(id<RAFText>)name age:(id<RAFNumber>)age;
+@concrete
+- (id<JSSurveyFormModel>)raf_extract;
 @end
 
 @interface JSSurveyViewModel : NSObject
