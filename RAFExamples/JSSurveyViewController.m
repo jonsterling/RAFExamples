@@ -12,6 +12,7 @@
 #import <ReactiveFormlets/RAFInputRow.h>
 #import <ReactiveFormlets/RAFValidator.h>
 #import <ReactiveFormlets/RAFValidation.h>
+#import <ReactiveFormlets/RAFButtonRow.h>
 #import <ReactiveFormlets/EXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "JSSurveyViewModel.h"
@@ -33,7 +34,18 @@
     id<RAFText> nameField = [[[RAFTextInputRow new] placeholder:@"George Smiley"] validator:self.viewModel.nameValidator];
     id<RAFNumber> ageField = [[[RAFNumberInputRow new] placeholder:@"62"] validator:self.viewModel.ageValidator];
 
+    RAFButtonRow *button = [RAFButtonRow new];
+    button.title = @"Toggle Editing";
+    button.command = [RACCommand command];
+    [button.command subscribeNext:^(id x) {
+        _form.editable = !_form.editable;
+    }];
+
     _form = [JSSurveyForm name:nameField age:ageField];
+    _form.elementOrdering = ^(id<JSSurveyFormModel> form) {
+        return @[ form.name, form.age, button ];
+    };
+
     RAC(self.viewModel.data) = _form.rawDataSignal;
     RAC(self.viewModel.validationState) = _form.validationSignal;
 
