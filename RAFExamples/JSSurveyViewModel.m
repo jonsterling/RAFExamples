@@ -14,13 +14,17 @@
 - (id)init {
     if (self = [super init]) {
         RAFValidator *nameNotNil = [self notNilValidatorWithName:@"name"];
-        _nameValidator = [nameNotNil raf_append:[RAFValidator predicate:^RAFValidation *(NSString *text) {
-            return text.length > 0 ? [RAFValidation success:text] : [RAFValidation failure:@[ @"name = “”" ]];
+        _nameValidator = [nameNotNil raf_append:[RAFValidator predicate:^BOOL(NSString *text) {
+            return text.length > 0;
+        } errors:^NSArray *(id object) {
+            return @[ @"name = “”" ];
         }]];
 
         RAFValidator *ageNotNil = [self notNilValidatorWithName:@"age"];
-        _ageValidator = [ageNotNil raf_append:[RAFValidator predicate:^RAFValidation *(NSNumber *number) {
-            return ![number isEqualToNumber:@0] ? [RAFValidation success:number] : [RAFValidation failure:@[ @"age = 0" ]];
+        _ageValidator = [ageNotNil raf_append:[RAFValidator predicate:^BOOL(NSNumber *age) {
+            return ![age isEqualToNumber:@0];
+        } errors:^NSArray *(id object) {
+            return @[ @"age = 0" ];
         }]];
 
         RACSignal *validation = RACAbleWithStart(self.validationState);
@@ -40,9 +44,11 @@
 }
 
 - (RAFValidator *)notNilValidatorWithName:(NSString *)name {
-    return [RAFValidator predicate:^RAFValidation *(id object) {
+    return [RAFValidator predicate:^BOOL(id object) {
+        return object != nil;
+    } errors:^NSArray *(id object) {
         NSString *message = [NSString stringWithFormat:@"%@ is nil", name];
-        return object ? [RAFValidation success:object] : [RAFValidation failure:@[ message ]];
+        return @[ message ];
     }];
 }
 

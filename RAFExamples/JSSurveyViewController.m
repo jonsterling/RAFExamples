@@ -31,8 +31,15 @@
 
     Class JSSurveyForm = [RAFSingleSectionTableForm model:@protocol(JSSurveyFormModel)];
 
-    id<RAFText> nameField = [[[RAFTextInputRow new] placeholder:@"George Smiley"] validator:self.viewModel.nameValidator];
-    id<RAFNumber> ageField = [[[RAFNumberInputRow new] placeholder:@"62"] validator:self.viewModel.ageValidator];
+    RAFTextInputRow *nameField = [[RAFTextInputRow new] validator:self.viewModel.nameValidator];
+    nameField.configureTextField = ^(UITextField *textField) {
+        textField.placeholder = @"George Smiley";
+    };
+
+    RAFNumberInputRow *ageField = [[RAFNumberInputRow new] validator:self.viewModel.ageValidator];
+    ageField.configureTextField = ^(UITextField *textField) {
+        textField.placeholder = @"62";
+    };
 
     RAFButtonRow *button = [RAFButtonRow new];
     button.title = @"Toggle Editing";
@@ -63,9 +70,8 @@
 
     RAC(label, text) = RACAbleWithStart(self.viewModel.message);
 
-    UITableView *formTableView = [_form buildView];
-    formTableView.tableFooterView = label;
-    self.view = formTableView;
+    _form.tableView.tableFooterView = label;
+    self.view = _form.tableView;
 }
 
 - (void)viewDidLoad {
@@ -80,8 +86,7 @@
     @weakify(self);
     [self.viewModel.doneCommand subscribeNext:^(id sender) {
         @strongify(self);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done!" message:self.viewModel.message delegate:nil cancelButtonTitle:@"Yep!" otherButtonTitles:nil];
-        [alert show];
+        [[[UIAlertView alloc] initWithTitle:@"Done!" message:self.viewModel.message delegate:nil cancelButtonTitle:@"Yep!" otherButtonTitles:nil] show];
     }];
 }
 
