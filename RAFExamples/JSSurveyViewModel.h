@@ -24,7 +24,6 @@
 @property (strong, readonly) RAFValidator *nameValidator;
 @property (strong, readonly) RAFValidator *ageValidator;
 
-@property (strong) id<JSSurveyFormModel> data;
 @property (strong) RAFValidation *validationState;
-@property (strong) NSString *message;
+@property (strong, readonly) NSString *message;
 @end

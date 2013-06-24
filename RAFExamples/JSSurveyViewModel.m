@@ -9,6 +9,10 @@
 #import "JSSurveyViewModel.h"
 #import <ReactiveFormlets/NSArray+RAFMonoid.h>
 
+@interface JSSurveyViewModel ()
+@property (strong, readwrite) NSString *message;
+@end
+
 @implementation JSSurveyViewModel
 
 - (id)init {

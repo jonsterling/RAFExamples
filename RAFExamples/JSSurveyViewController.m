@@ -19,7 +19,7 @@
 
 @interface JSSurveyViewController ()
 @property (strong, readonly) JSSurveyViewModel *viewModel;
-@property (strong, readonly) RAFSingleSectionTableForm<JSSurveyFormModel> *form;
+@property (strong, readonly) RAFOneSectionTableForm<JSSurveyFormModel> *form;
 @end
 
 @implementation JSSurveyViewController
@@ -29,7 +29,7 @@
 
     _viewModel = [JSSurveyViewModel new];
 
-    Class JSSurveyForm = [RAFSingleSectionTableForm model:@protocol(JSSurveyFormModel)];
+    Class JSSurveyFormSection = [RAFTableSection model:@protocol(JSSurveyFormModel)];
 
     RAFTextInputRow *nameField = [[RAFTextInputRow new] validator:self.viewModel.nameValidator];
     nameField.configureTextField = ^(UITextField *textField) {
@@ -41,22 +41,24 @@
         textField.placeholder = @"62";
     };
 
-    RAFButtonRow *button = [RAFButtonRow new];
-    button.title = @"Toggle Editing";
-    button.command = [RACCommand command];
-    [button.command subscribeNext:^(id x) {
-        _form.editable = !_form.editable;
+    RAFTableSection<JSSurveyFormModel> *section = [JSSurveyFormSection name:nameField age:ageField];
+    RAFButtonRow *buttonRow = [RAFButtonRow new];
+    buttonRow.command = [RACCommand command];
+
+    @weakify(self);
+    [buttonRow.command subscribeNext:^(id _) {
+        @strongify(self);
+        self.form.editable = !self.form.editable;
     }];
 
-    _form = [JSSurveyForm name:nameField age:ageField];
-    _form.elementOrdering = ^(id<JSSurveyFormModel> form) {
-        return @[ form.name, form.age, button ];
-    };
+    section.rows = @[ section.name, section.age, buttonRow ];
+    section.headerTitle = @"Enter your info:";
+    _form = [RAFOneSectionTableForm section:section];
 
-    RAC(self.viewModel.data) = _form.rawDataSignal;
     RAC(self.viewModel.validationState) = _form.validationSignal;
-
-    _form.headerTitle = @"Enter your info:";
+    RAC(buttonRow, title) = [RACAbleWithStart(self.form.editable) map:^id(NSNumber *editable) {
+        return editable.boolValue ? @"Turn Off Editing" : @"Turn On Editing";
+    }];
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 280.f, 140.f)];
     label.numberOfLines = 0;
