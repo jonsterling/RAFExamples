@@ -73,6 +73,7 @@
     RAC(label, text) = RACAbleWithStart(self.viewModel.message);
 
     _form.tableView.tableFooterView = label;
+    _form.rowsByEditingOrder = @[ section.name, section.age ];
     self.view = _form.tableView;
 }
 
