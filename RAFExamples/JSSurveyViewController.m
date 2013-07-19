@@ -41,9 +41,14 @@
         textField.placeholder = @"62";
     };
 
-    RAFTableSection<JSSurveyFormModel> *section = [JSSurveyFormSection name:nameField age:ageField];
     RAFButtonRow *buttonRow = [RAFButtonRow new];
     buttonRow.command = [RACCommand command];
+
+    RAFTableSection<JSSurveyFormModel> *section = [[JSSurveyFormSection name:nameField age:ageField] modifySection:^(id<RAFMutableTableSection, JSSurveyFormModel> section) {
+        section.rows = @[ section.name, section.age, buttonRow ];
+        section.headerTitle = @"Enter your info:";
+    }];
+
 
     @weakify(self);
     [buttonRow.command subscribeNext:^(id _) {
@@ -51,8 +56,6 @@
         self.form.editable = !self.form.editable;
     }];
 
-    section.rows = @[ section.name, section.age, buttonRow ];
-    section.headerTitle = @"Enter your info:";
     _form = [RAFOneSectionTableForm section:section];
 
     RAC(self.viewModel.validationState) = _form.validationSignal;
