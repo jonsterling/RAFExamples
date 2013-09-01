@@ -9,6 +9,8 @@
 #import "JSSurveyViewModel.h"
 #import <ReactiveFormlets/NSArray+RAFMonoid.h>
 
+NSString *const JSSurveyFormErrorDomain = @"JSSurveyFormErrorDomain";
+
 @interface JSSurveyViewModel ()
 @property (strong, readwrite) NSString *message;
 @end
@@ -20,27 +22,31 @@
         RAFValidator *nameNotNil = [self notNilValidatorWithName:@"name"];
         _nameValidator = [nameNotNil raf_append:[RAFValidator predicate:^BOOL(NSString *text) {
             return text.length > 0;
-        } errors:^NSArray *(id object) {
-            return @[ @"name = “”" ];
+        } error:^NSError *(id object) {
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: @"name == “”" };
+            return [NSError errorWithDomain:JSSurveyFormErrorDomain code:JSSurveyFormValidationErrorCode userInfo:userInfo];
         }]];
 
         RAFValidator *ageNotNil = [self notNilValidatorWithName:@"age"];
         _ageValidator = [ageNotNil raf_append:[RAFValidator predicate:^BOOL(NSNumber *age) {
             return ![age isEqualToNumber:@0];
-        } errors:^NSArray *(id object) {
-            return @[ @"age = 0" ];
+        } error:^NSError *(id object) {
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: @"age == 0" };
+            return [NSError errorWithDomain:JSSurveyFormErrorDomain code:JSSurveyFormValidationErrorCode userInfo:userInfo];
         }]];
 
-        RACSignal *validation = RACAbleWithStart(self.validationState);
-        RACSignal *isValid = [validation raf_isSuccessSignal];
-        _doneCommand = [RACCommand commandWithCanExecuteSignal:isValid];
+        _doneCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(RAFValidation *validation) {
+            NSString *message = [validation caseSuccess:^(id<JSSurveyFormModel> value) {
+                return [NSString stringWithFormat:@"%@ is %i years old!", value.name.raf_cast, value.age.raf_cast.integerValue];
+            } failure:^(NSArray *errors) {
+                NSArray *descriptions = [errors.rac_sequence map:^(NSError *error) {
+                    return error.localizedDescription;
+                }].array;
 
-        RAC(self.message) = [validation map:^(RAFValidation *v) {
-            return [v caseSuccess:^(id<JSSurveyFormModel> value) {
-                return [NSString stringWithFormat:@"%@ is %@ years old!", value.name.raf_extract, value.age.raf_extract];
-            } failure:^(id errors) {
-                return [NSString stringWithFormat:@"[%@]", [errors componentsJoinedByString:@", "]];
+                return [NSString stringWithFormat:@"[%@]", [descriptions componentsJoinedByString:@", "]];
             }];
+
+            return [RACSignal return:message];
         }];
     }
 
@@ -50,9 +56,9 @@
 - (RAFValidator *)notNilValidatorWithName:(NSString *)name {
     return [RAFValidator predicate:^BOOL(id object) {
         return object != nil;
-    } errors:^NSArray *(id object) {
-        NSString *message = [NSString stringWithFormat:@"%@ is nil", name];
-        return @[ message ];
+    } error:^NSError *(id object) {
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"%@ is nil", name] };
+        return [NSError errorWithDomain:JSSurveyFormErrorDomain code:JSSurveyFormValidationErrorCode userInfo:userInfo];
     }];
 }
 

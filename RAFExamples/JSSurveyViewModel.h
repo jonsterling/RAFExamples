@@ -11,19 +11,22 @@
 #import <ReactiveFormlets/RAFValidation.h>
 #import <ReactiveFormlets/RAFValidator.h>
 
-@protocol JSSurveyFormModel <RAFExtract>
-- (id<RAFText>)name;
+extern NSString *const JSSurveyFormErrorDomain;
+
+typedef enum {
+    JSSurveyFormValidationErrorCode
+} JSSurveyFormErrorCode;
+
+@protocol JSSurveyFormModel <RAFCast>
+- (id<RAFString>)name;
 - (id<RAFNumber>)age;
-+ (instancetype)name:(id<RAFText>)name age:(id<RAFNumber>)age;
++ (instancetype)name:(id<RAFString>)name age:(id<RAFNumber>)age;
 @concrete
-- (id<JSSurveyFormModel>)raf_extract;
+- (id<JSSurveyFormModel>)raf_cast;
 @end
 
 @interface JSSurveyViewModel : NSObject
 @property (strong, readonly) RACCommand *doneCommand;
 @property (strong, readonly) RAFValidator *nameValidator;
 @property (strong, readonly) RAFValidator *ageValidator;
-
-@property (strong) RAFValidation *validationState;
-@property (strong, readonly) NSString *message;
 @end

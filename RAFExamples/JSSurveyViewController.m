@@ -19,64 +19,52 @@
 
 @interface JSSurveyViewController ()
 @property (strong, readonly) JSSurveyViewModel *viewModel;
-@property (strong, readonly) RAFOneSectionTableForm<JSSurveyFormModel> *form;
+@property (strong, readonly) RAFTableForm<JSSurveyFormModel> *form;
 @end
 
-@implementation JSSurveyViewController
+@implementation JSSurveyViewController 
 
 - (void)loadView {
     [super loadView];
 
     _viewModel = [JSSurveyViewModel new];
 
-    Class JSSurveyFormSection = [RAFTableSection model:@protocol(JSSurveyFormModel)];
+    Class JSSurveyForm = [RAFTableForm model:@protocol(JSSurveyFormModel)];
 
     RAFTextInputRow *nameField = [[RAFTextInputRow new] validator:self.viewModel.nameValidator];
-    nameField.configureTextField = ^(UITextField *textField) {
-        textField.placeholder = @"George Smiley";
-    };
+    nameField.textField.placeholder = @"George Smiley";
 
     RAFNumberInputRow *ageField = [[RAFNumberInputRow new] validator:self.viewModel.ageValidator];
-    ageField.configureTextField = ^(UITextField *textField) {
-        textField.placeholder = @"62";
-    };
+    ageField.textField.placeholder = @"62";
 
     RAFButtonRow *buttonRow = [RAFButtonRow new];
-    buttonRow.command = [RACCommand command];
-
-    RAFTableSection<JSSurveyFormModel> *section = [[JSSurveyFormSection name:nameField age:ageField] modifySection:^(id<RAFMutableTableSection, JSSurveyFormModel> section) {
-        section.rows = @[ section.name, section.age, buttonRow ];
-        section.headerTitle = @"Enter your info:";
+    buttonRow.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal empty];
     }];
 
+    _form = [JSSurveyForm name:nameField age:ageField];
+
+    RAFTableSection *section = [RAFTableSection uniqueIdentifier:nil rows:@[ _form.name, _form.age, buttonRow ] headerTitle:@"Enter your info:" footerTitle:nil];
+    _form.sections = @[ section ];
 
     @weakify(self);
-    [buttonRow.command subscribeNext:^(id _) {
+    [buttonRow.command.executionSignals subscribeNext:^(id _) {
         @strongify(self);
         self.form.editable = !self.form.editable;
     }];
 
-    _form = [RAFOneSectionTableForm section:section];
-
-    RAC(self.viewModel.validationState) = _form.validationSignal;
-    RAC(buttonRow, title) = [RACAbleWithStart(self.form.editable) map:^id(NSNumber *editable) {
+    RAC(buttonRow, title) = [RACObserve(self, form.editable) map:^id(NSNumber *editable) {
         return editable.boolValue ? @"Turn Off Editing" : @"Turn On Editing";
     }];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 280.f, 140.f)];
-    label.numberOfLines = 0;
-    label.lineBreakMode = NSLineBreakByWordWrapping;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:76.0/255 green:86.0/255 blue:108.0/255 alpha:1];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:17.f];
-    label.shadowColor = [UIColor whiteColor];
-    label.shadowOffset = CGSizeMake(0.f, 1.f);
-
-    RAC(label, text) = RACAbleWithStart(self.viewModel.message);
-
-    _form.tableView.tableFooterView = label;
     self.view = _form.tableView;
+
+    Class Model = RAFReify(JSSurveyFormModel);
+    [_form.channelTerminal sendNext:[Model name:@"JON" age:@34]];
+
+    [self.form.totalDataSignal subscribeNext:^(id x) {
+        NSLog(@"x: %@", x);
+    }];
 }
 
 - (void)viewDidLoad {
@@ -84,14 +72,24 @@
 
     self.title = @"Survey";
 
+    @weakify(self);
+    RACCommand *doneCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal empty];
+    }];
+
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-    doneButton.rac_command = self.viewModel.doneCommand;
+    doneButton.rac_command = doneCommand;
+
+    [[[self.form.validationSignal sample:doneCommand.executionSignals] flattenMap:^RACStream *(RAFValidation *validation) {
+        @strongify(self);
+        return [self.viewModel.doneCommand execute:validation];
+    }].publish connect];
+    
+
     self.navigationItem.rightBarButtonItem = doneButton;
 
-    @weakify(self);
-    [self.viewModel.doneCommand subscribeNext:^(id sender) {
-        @strongify(self);
-        [[[UIAlertView alloc] initWithTitle:@"Done!" message:self.viewModel.message delegate:nil cancelButtonTitle:@"Yep!" otherButtonTitles:nil] show];
+    [self.viewModel.doneCommand.executionSignals.flatten subscribeNext:^(NSString *message) {
+        [[[UIAlertView alloc] initWithTitle:@"Done!" message:message delegate:nil cancelButtonTitle:@"Yep!" otherButtonTitles:nil] show];
     }];
 }
 
