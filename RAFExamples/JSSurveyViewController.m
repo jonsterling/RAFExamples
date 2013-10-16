@@ -31,12 +31,10 @@
 
     Class JSSurveyForm = [RAFTableForm model:@protocol(JSSurveyFormModel)];
 
-    RAFTextInputRow *nameField = [RAFTextInputRow new];
-    nameField.validator = self.viewModel.nameValidator;
+    RAFTextInputRow *nameField = [[RAFTextInputRow alloc] initWithValidator:self.viewModel.nameValidator];
     nameField.textField.placeholder = @"George Smiley";
 
-    RAFNumberInputRow *ageField = [RAFNumberInputRow new];
-    ageField.validator = self.viewModel.ageValidator;
+    RAFNumberInputRow *ageField = [[RAFNumberInputRow alloc] initWithValidator:self.viewModel.ageValidator];
     ageField.textField.placeholder = @"62";
 
     RAFButtonRow *buttonRow = [RAFButtonRow new];
